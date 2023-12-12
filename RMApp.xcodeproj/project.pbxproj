@@ -22,6 +22,9 @@
 		AB11D11C2B285E9700567E4C /* RMLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB11D11B2B285E9700567E4C /* RMLocation.swift */; };
 		AB11D11E2B285EAB00567E4C /* RMEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB11D11D2B285EAB00567E4C /* RMEpisode.swift */; };
 		AB11D1202B285EBC00567E4C /* RMCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB11D11F2B285EBC00567E4C /* RMCharacter.swift */; };
+		AB11D1222B28AC4C00567E4C /* RMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB11D1212B28AC4C00567E4C /* RMService.swift */; };
+		AB11D1242B28AC5B00567E4C /* RMRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB11D1232B28AC5B00567E4C /* RMRequest.swift */; };
+		AB11D1262B28AD3A00567E4C /* RMEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB11D1252B28AD3A00567E4C /* RMEndpoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,11 +59,14 @@
 		AB11D0FB2B28574500567E4C /* RMAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		AB11D1132B285DE000567E4C /* CharacterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterVC.swift; sourceTree = "<group>"; };
 		AB11D1152B285DF700567E4C /* LocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationVC.swift; sourceTree = "<group>"; };
-		AB11D1172B285E0B00567E4C /* EpisodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EpisodeVC.swift; path = ../../../../EpisodeVC.swift; sourceTree = "<group>"; };
+		AB11D1172B285E0B00567E4C /* EpisodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeVC.swift; sourceTree = "<group>"; };
 		AB11D1192B285E2300567E4C /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		AB11D11B2B285E9700567E4C /* RMLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMLocation.swift; sourceTree = "<group>"; };
 		AB11D11D2B285EAB00567E4C /* RMEpisode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMEpisode.swift; sourceTree = "<group>"; };
 		AB11D11F2B285EBC00567E4C /* RMCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMCharacter.swift; sourceTree = "<group>"; };
+		AB11D1212B28AC4C00567E4C /* RMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMService.swift; sourceTree = "<group>"; };
+		AB11D1232B28AC5B00567E4C /* RMRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMRequest.swift; sourceTree = "<group>"; };
+		AB11D1252B28AD3A00567E4C /* RMEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMEndpoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +168,9 @@
 		AB11D10C2B285D2500567E4C /* APIClient */ = {
 			isa = PBXGroup;
 			children = (
+				AB11D1212B28AC4C00567E4C /* RMService.swift */,
+				AB11D1232B28AC5B00567E4C /* RMRequest.swift */,
+				AB11D1252B28AD3A00567E4C /* RMEndpoint.swift */,
 			);
 			path = APIClient;
 			sourceTree = "<group>";
@@ -354,8 +363,11 @@
 				AB11D1202B285EBC00567E4C /* RMCharacter.swift in Sources */,
 				AB11D11C2B285E9700567E4C /* RMLocation.swift in Sources */,
 				AB11D0D92B28574300567E4C /* AppDelegate.swift in Sources */,
+				AB11D1222B28AC4C00567E4C /* RMService.swift in Sources */,
 				AB11D1142B285DE000567E4C /* CharacterVC.swift in Sources */,
+				AB11D1262B28AD3A00567E4C /* RMEndpoint.swift in Sources */,
 				AB11D0DB2B28574300567E4C /* SceneDelegate.swift in Sources */,
+				AB11D1242B28AC5B00567E4C /* RMRequest.swift in Sources */,
 				AB11D11A2B285E2300567E4C /* SettingsVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
