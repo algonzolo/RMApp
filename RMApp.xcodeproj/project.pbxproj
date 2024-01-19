@@ -25,6 +25,9 @@
 		AB11D1222B28AC4C00567E4C /* RMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB11D1212B28AC4C00567E4C /* RMService.swift */; };
 		AB11D1242B28AC5B00567E4C /* RMRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB11D1232B28AC5B00567E4C /* RMRequest.swift */; };
 		AB11D1262B28AD3A00567E4C /* RMEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB11D1252B28AD3A00567E4C /* RMEndpoint.swift */; };
+		AB2C1BB62B5A8E6100722CB6 /* CharacterListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2C1BB52B5A8E6100722CB6 /* CharacterListViewModel.swift */; };
+		AB2C1BB82B5A8F0500722CB6 /* CharacterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2C1BB72B5A8F0500722CB6 /* CharacterListView.swift */; };
+		AB2C1BBA2B5A9E5800722CB6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2C1BB92B5A9E5800722CB6 /* Extensions.swift */; };
 		ABF15A322B3396B70047D208 /* RMGetAllCharactersResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF15A312B3396B70047D208 /* RMGetAllCharactersResponse.swift */; };
 		ABF8A0342B3050E70019916F /* RMCharacterOrigin.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF8A0332B3050E70019916F /* RMCharacterOrigin.swift */; };
 		ABF8A0362B30511D0019916F /* RMCharacterLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF8A0352B30511D0019916F /* RMCharacterLocation.swift */; };
@@ -72,6 +75,9 @@
 		AB11D1212B28AC4C00567E4C /* RMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMService.swift; sourceTree = "<group>"; };
 		AB11D1232B28AC5B00567E4C /* RMRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMRequest.swift; sourceTree = "<group>"; };
 		AB11D1252B28AD3A00567E4C /* RMEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMEndpoint.swift; sourceTree = "<group>"; };
+		AB2C1BB52B5A8E6100722CB6 /* CharacterListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListViewModel.swift; sourceTree = "<group>"; };
+		AB2C1BB72B5A8F0500722CB6 /* CharacterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListView.swift; sourceTree = "<group>"; };
+		AB2C1BB92B5A9E5800722CB6 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		ABF15A312B3396B70047D208 /* RMGetAllCharactersResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMGetAllCharactersResponse.swift; sourceTree = "<group>"; };
 		ABF8A0332B3050E70019916F /* RMCharacterOrigin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMCharacterOrigin.swift; sourceTree = "<group>"; };
 		ABF8A0352B30511D0019916F /* RMCharacterLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMCharacterLocation.swift; sourceTree = "<group>"; };
@@ -169,6 +175,7 @@
 		AB11D10B2B28595D00567E4C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AB2C1BB92B5A9E5800722CB6 /* Extensions.swift */,
 				AB11D0E12B28574500567E4C /* Assets.xcassets */,
 				AB11D0E32B28574500567E4C /* LaunchScreen.storyboard */,
 			);
@@ -204,6 +211,7 @@
 		AB11D10F2B285D6300567E4C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AB2C1BB72B5A8F0500722CB6 /* CharacterListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -219,6 +227,7 @@
 		AB11D1112B285D8900567E4C /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				AB2C1BB52B5A8E6100722CB6 /* CharacterListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -397,6 +406,7 @@
 			files = (
 				AB11D1162B285DF700567E4C /* LocationVC.swift in Sources */,
 				ABF8A0392B30536E0019916F /* CharacterStatus.swift in Sources */,
+				AB2C1BB82B5A8F0500722CB6 /* CharacterListView.swift in Sources */,
 				ABF15A322B3396B70047D208 /* RMGetAllCharactersResponse.swift in Sources */,
 				AB11D0DD2B28574300567E4C /* MainTabVC.swift in Sources */,
 				AB11D1182B285E0B00567E4C /* EpisodeVC.swift in Sources */,
@@ -407,12 +417,14 @@
 				AB11D0D92B28574300567E4C /* AppDelegate.swift in Sources */,
 				AB11D1222B28AC4C00567E4C /* RMService.swift in Sources */,
 				AB11D1142B285DE000567E4C /* CharacterVC.swift in Sources */,
+				AB2C1BBA2B5A9E5800722CB6 /* Extensions.swift in Sources */,
 				AB11D1262B28AD3A00567E4C /* RMEndpoint.swift in Sources */,
 				ABF8A0342B3050E70019916F /* RMCharacterOrigin.swift in Sources */,
 				AB11D0DB2B28574300567E4C /* SceneDelegate.swift in Sources */,
 				ABF8A03B2B3054630019916F /* CharacterGender.swift in Sources */,
 				AB11D1242B28AC5B00567E4C /* RMRequest.swift in Sources */,
 				AB11D11A2B285E2300567E4C /* SettingsVC.swift in Sources */,
+				AB2C1BB62B5A8E6100722CB6 /* CharacterListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,7 +524,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -569,7 +581,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -591,8 +603,8 @@
 				INFOPLIST_FILE = RMApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -618,8 +630,8 @@
 				INFOPLIST_FILE = RMApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
