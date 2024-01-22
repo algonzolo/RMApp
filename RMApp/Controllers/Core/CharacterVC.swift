@@ -16,15 +16,25 @@ final class CharacterVC: UIViewController {
         view.backgroundColor = .systemBackground
         title = "Characters"
         view.addSubview(characterListView)
-        setupConstraints()
+        setupView()
     }
     
-    func setupConstraints() {
+    func setupView() {
+        characterListView.delegate = self
         NSLayoutConstraint.activate([
             characterListView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             characterListView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             characterListView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             characterListView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor)
         ])
+    }
+}
+
+extension CharacterVC: CharacterListViewDelegate {
+    func characterListView(_characterListView: CharacterListView, didSelectCharacter character: RMCharacter) {
+        let viewModel = CharacterDetailViewModel(character: character)
+        let detailVC = CharacterDetailVC(viewModel: viewModel)
+        detailVC.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }

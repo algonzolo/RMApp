@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol CharacterListViewDelegate: AnyObject {
+    func characterListView( _characterListView: CharacterListView, didSelectCharacter character: RMCharacter)
+}
+
 /// View that handles showing list of characters and etc.
 final class CharacterListView: UIView {
     // MARK: - Properties
+    public weak var delegate: CharacterListViewDelegate?
     private let viewModel = CharacterListViewModel()
     
     private let spinner: UIActivityIndicatorView = {
@@ -22,12 +27,16 @@ final class CharacterListView: UIView {
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 10)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.isHidden = true
         collectionView.alpha = 0
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(CharacterCollectionViewCell.self, forCellWithReuseIdentifier: CharacterCollectionViewCell.cellIdentifier)
+        collectionView.register(CharacterCollectionViewCell.self, 
+                                forCellWithReuseIdentifier: CharacterCollectionViewCell.cellIdentifier)
+        collectionView.register(FooterLoadingCollectionReusableView.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+                                withReuseIdentifier: FooterLoadingCollectionReusableView.cellIdentifier)
         return collectionView
     }()
     
@@ -69,6 +78,7 @@ final class CharacterListView: UIView {
 }
 
 extension CharacterListView: CharacterListViewModelDelegate {
+    
     func didLoadInitialCharacters() {
         spinner.stopAnimating()
         collectionView.isHidden = false
@@ -76,5 +86,9 @@ extension CharacterListView: CharacterListViewModelDelegate {
         UIView.animate(withDuration: 0.4) {
             self.collectionView.alpha = 1
         }
+    }
+    
+    func didSelectCharacter(_ character: RMCharacter) {
+        delegate?.characterListView(_characterListView: self, didSelectCharacter: character)
     }
 }

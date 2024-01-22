@@ -89,6 +89,7 @@ final class CharacterCollectionViewCell: UICollectionViewCell {
                     self?.imageView.image = image
                 }
             case .failure(let error):
+                print("Error \(error)")
                 break
             }
         }
