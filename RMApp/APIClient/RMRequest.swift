@@ -51,6 +51,45 @@ final class RMRequest {
         self.pathComponents = pathComponents
         self.queryParameters = queryParameters
     }
+    
+    convenience init?(url: URL) {
+        let string = url.absoluteString
+        if !string.contains(Constant.baseURL) { return nil }
+        let trimed = string.replacingOccurrences(of: Constant.baseURL + "/", with: "")
+        if trimed.contains("/") {
+            let component = trimed.components(separatedBy: "/")
+            if !component.isEmpty {
+                let endpointString = component[0]
+                if let rmEndpoint = RMEndpoint(rawValue: endpointString) {
+                    self.init(endpoint: rmEndpoint)
+                    return
+                }
+            }
+        } else if trimed.contains("?") {
+            let component = trimed.components(separatedBy: "?")
+            if !component.isEmpty {
+                let endpointString = component[0]
+                let queryItemsString = component[1]
+                let queryItems: [URLQueryItem] = queryItemsString.components(separatedBy: "&").compactMap({
+                    guard $0.contains("=") else {
+                        return nil
+                    }
+                    let parts = $0.components(separatedBy: "=")
+                    
+                    return URLQueryItem(
+                        name: parts[0],
+                        value: parts[1])
+                })
+                
+                if let rmEndpoint = RMEndpoint(rawValue: endpointString) {
+                    self.init(endpoint: rmEndpoint, queryParameters: queryItems)
+                    return
+                }
+            }
+        }
+        
+        return nil
+    }
 }
 
 extension RMRequest {

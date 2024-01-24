@@ -8,6 +8,7 @@
 import UIKit
 protocol CharacterListViewModelDelegate: AnyObject {
     func didLoadInitialCharacters()
+    func didLoadNextCharacters(with newIndexPath: [IndexPath])
     func didSelectCharacter(_ character: RMCharacter)
 }
 
@@ -21,7 +22,9 @@ final class CharacterListViewModel: NSObject {
                     characterName: character.name,
                     characterStatus: character.status,
                     chracterImageURL: URL(string: character.image))
-                cellViewModels.append(viewModel)
+                if !cellViewModels.contains(viewModel) {
+                    cellViewModels.append(viewModel)
+                }
             }
         }
     }
@@ -45,7 +48,44 @@ final class CharacterListViewModel: NSObject {
         }
     }
     
-    public func fetchAdditionalCharacters() {
+    public func fetchAdditionalCharacters(url: URL) {
+        guard !isLoadingCharacters else { return }
+        isLoadingCharacters = true
+        print("Fetching more characters")
+        guard let request = RMRequest(url: url) else {
+            isLoadingCharacters = false
+            print("Failed to create request")
+            return
+        }
+        
+        RMService.shared.execute(request,
+                                 expecting: RMGetAllCharactersResponse.self) { [weak self] result in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .success(let responseModel):
+                let nextResults = responseModel.results
+                let info = responseModel.info
+                strongSelf.apiInfo = info
+                
+                let initialCount = strongSelf.characters.count
+                let newCount = nextResults.count
+                let total = initialCount + newCount
+                let startingIndex = total - newCount
+                let indexPathsToAdd: [IndexPath] = Array(startingIndex..<(startingIndex+newCount)).compactMap({
+                    return IndexPath(row: $0, section: 0)
+                })
+                strongSelf.characters.append(contentsOf: nextResults)
+                
+                DispatchQueue.main.async {
+                    strongSelf.delegate?.didLoadNextCharacters(with: indexPathsToAdd)
+                    strongSelf.isLoadingCharacters = false
+                }
+                
+            case .failure(let failure):
+                print(String(describing: failure))
+                strongSelf.isLoadingCharacters = false
+            }
+        }
     }
     
     public var shouldShowLoadingIndicator: Bool {
@@ -101,16 +141,21 @@ extension CharacterListViewModel: UICollectionViewDataSource, UICollectionViewDe
 // MARK: - ScrollView
 extension CharacterListViewModel: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard shouldShowLoadingIndicator, !isLoadingCharacters else { return }
-        // TODO: - Learning how it works
-        let offset = scrollView.contentOffset.y
-        let totalContentHeight = scrollView.contentSize.height
-        let totalScrollViewFixedHeight = scrollView.frame.size.height
-        
-        if offset >= (totalContentHeight - totalScrollViewFixedHeight - 120) {
-            print("Start fetching")
-            isLoadingCharacters = true
+        guard shouldShowLoadingIndicator,
+              !isLoadingCharacters,
+              !cellViewModels.isEmpty,
+              let nextPageURL = apiInfo?.next,
+              let url = URL(string: nextPageURL) else { return }
+        // TODO: Learning how it works
+        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { [weak self] timer in
+            let offset = scrollView.contentOffset.y
+            let totalContentHeight = scrollView.contentSize.height
+            let totalScrollViewFixedHeight = scrollView.frame.size.height
+            
+            if offset >= (totalContentHeight - totalScrollViewFixedHeight - 120) {
+                self?.fetchAdditionalCharacters(url: url)
+            }
+            timer.invalidate()
         }
     }
-    
 }
