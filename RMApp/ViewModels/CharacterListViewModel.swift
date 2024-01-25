@@ -51,7 +51,6 @@ final class CharacterListViewModel: NSObject {
     public func fetchAdditionalCharacters(url: URL) {
         guard !isLoadingCharacters else { return }
         isLoadingCharacters = true
-        print("Fetching more characters")
         guard let request = RMRequest(url: url) else {
             isLoadingCharacters = false
             print("Failed to create request")
