@@ -57,28 +57,37 @@ extension CharacterDetailVC: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch section {
-        case 0:
+        let sectionType = viewModel.sections[section]
+        switch sectionType {
+        case .photo:
             return 1
-        case 1:
-            return 4
-        case 2:
-            return 6
-        default:
-            return 1
+        case .info(viewModels: let viewModels):
+            return viewModels.count
+        case .episodes(viewModels: let viewModels):
+            return viewModels.count
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
         
-        if indexPath.section == 0 {
+        
+        let sectionType = viewModel.sections[indexPath.section]
+        switch sectionType {
+        case .photo(let viewModel):
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCharacterDetailCell.cellIdentifier, for: indexPath) as? PhotoCharacterDetailCell else { fatalError() }
+            cell.configure(with: viewModel)
             cell.backgroundColor = .systemBlue
-        } else if indexPath.section == 1{
+            return cell
+        case .info(viewModels: let viewModels):
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: InfoCharacterDetailCell.cellIdentifier, for: indexPath) as? InfoCharacterDetailCell else { fatalError() }
+            cell.configure(with: viewModels[indexPath.row])
             cell.backgroundColor = .systemRed
-        } else {
+            return cell
+        case .episodes(viewModels: let viewModels):
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EpisodeCharacterDetailCell.cellIdentifier, for: indexPath) as? EpisodeCharacterDetailCell else { fatalError() }
+            cell.configure(with: viewModels[indexPath.row])
             cell.backgroundColor = .systemGreen
+            return cell
         }
-        return cell
     }
 }

@@ -18,7 +18,7 @@ final class CharacterListViewModel: NSObject {
     private var characters: [RMCharacter] = [] {
         didSet {
             for character in characters {
-                let viewModel = CharacterCollectionViewCellViewModel(
+                let viewModel = CharacterCellViewModel(
                     characterName: character.name,
                     characterStatus: character.status,
                     chracterImageURL: URL(string: character.image))
@@ -28,7 +28,7 @@ final class CharacterListViewModel: NSObject {
             }
         }
     }
-    private var cellViewModels: [CharacterCollectionViewCellViewModel] = []
+    private var cellViewModels: [CharacterCellViewModel] = []
     private var apiInfo: RMGetAllCharactersResponse.Info? = nil
     
     func fetchCharacters() {

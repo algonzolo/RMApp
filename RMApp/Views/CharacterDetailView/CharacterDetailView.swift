@@ -56,7 +56,9 @@ final class CharacterDetailView: UIView {
             return self.createSection(for: sectionIndex)
         }
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(PhotoCharacterDetailCell.self, forCellWithReuseIdentifier: PhotoCharacterDetailCell.cellIdentifier)
+        collectionView.register(InfoCharacterDetailCell.self, forCellWithReuseIdentifier: InfoCharacterDetailCell.cellIdentifier)
+        collectionView.register(EpisodeCharacterDetailCell.self, forCellWithReuseIdentifier: EpisodeCharacterDetailCell.cellIdentifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }

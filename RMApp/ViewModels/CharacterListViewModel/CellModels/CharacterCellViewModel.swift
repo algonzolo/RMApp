@@ -1,5 +1,5 @@
 //
-//  CharacterCollectionViewCellViewModel.swift
+//  CharacterCellViewModel.swift
 //  RMApp
 //
 //  Created by Albert Garipov on 22.01.2024.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class CharacterCollectionViewCellViewModel: Hashable, Equatable {
+final class CharacterCellViewModel: Hashable, Equatable {
 
     public let characterName: String
     private let characterStatus: CharacterStatus
@@ -39,7 +39,7 @@ final class CharacterCollectionViewCellViewModel: Hashable, Equatable {
     
     // MARK: - Hashable
     
-    static func == (lhs: CharacterCollectionViewCellViewModel, rhs: CharacterCollectionViewCellViewModel) -> Bool {
+    static func == (lhs: CharacterCellViewModel, rhs: CharacterCellViewModel) -> Bool {
         return lhs.hashValue == rhs.hashValue
     }
     
