@@ -11,7 +11,6 @@ import UIKit
 final class CharacterCollectionViewCell: UICollectionViewCell {
     static let cellIdentifier = "CharacterCollectionViewCell"
     // MARK: - Properties
-    
     private let imageView: UIImageView = {
        let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -41,6 +40,7 @@ final class CharacterCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         contentView.backgroundColor = .secondarySystemBackground
         contentView.layer.cornerRadius = 8
+        contentView.layer.masksToBounds = true
         contentView.addSubviews(imageView, nameLabel, statusLabel)
         addConstraints()
     }

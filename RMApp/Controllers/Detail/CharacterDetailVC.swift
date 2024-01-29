@@ -76,12 +76,10 @@ extension CharacterDetailVC: UICollectionViewDelegate, UICollectionViewDataSourc
         case .photo(let viewModel):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCharacterDetailCell.cellIdentifier, for: indexPath) as? PhotoCharacterDetailCell else { fatalError() }
             cell.configure(with: viewModel)
-            cell.backgroundColor = .systemBlue
             return cell
         case .info(viewModels: let viewModels):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: InfoCharacterDetailCell.cellIdentifier, for: indexPath) as? InfoCharacterDetailCell else { fatalError() }
             cell.configure(with: viewModels[indexPath.row])
-            cell.backgroundColor = .systemRed
             return cell
         case .episodes(viewModels: let viewModels):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EpisodeCharacterDetailCell.cellIdentifier, for: indexPath) as? EpisodeCharacterDetailCell else { fatalError() }

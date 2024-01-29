@@ -8,5 +8,9 @@
 import Foundation
 
 final class EpisodeCharacterDetailCellViewModel {
-    init() {}
+    private let episodeDataURL: URL?
+    
+    init(episodeDataURL: URL?) {
+        self.episodeDataURL = episodeDataURL
+    }
 }

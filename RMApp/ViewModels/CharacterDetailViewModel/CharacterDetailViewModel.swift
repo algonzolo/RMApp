@@ -25,9 +25,21 @@ final class CharacterDetailViewModel {
     }
     
     private func setupSections() {
-        sections = [.photo(viewModel: .init()),
-                    .info(viewModels: [.init(), .init(), .init()]),
-                    .episodes(viewModels: [.init(), .init(), .init()])]
+        sections = [.photo(viewModel: .init(imageURL: URL(string: character.image))),
+                    .info(viewModels: [
+                        .init(type: .status, value: character.status.text),
+                        .init(type: .gender, value: character.gender.rawValue),
+                        .init(type: .type, value: character.type),
+                        .init(type: .species, value: character.species),
+                        .init(type: .origin, value: character.origin.name),
+                        .init(type: .location, value: character.location.name),
+                        .init(type: .created, value: character.created),
+                        .init(type: .episodeCount, value: "\(character.episode.count)")
+                    ]),
+                    .episodes(viewModels: character.episode.compactMap({
+                        return EpisodeCharacterDetailCellViewModel(episodeDataURL: URL(string: $0))
+                    }))
+        ]
     }
     
     public var requestURL: URL? {
