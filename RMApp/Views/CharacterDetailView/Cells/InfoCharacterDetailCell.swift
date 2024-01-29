@@ -9,6 +9,7 @@ import UIKit
 
 final class InfoCharacterDetailCell: UICollectionViewCell {
     static let cellIdentifier = "InfoCharacterDetailCell"
+    //MARK: - Properties
     
     private let valueLabel: UILabel = {
        let label = UILabel()
@@ -79,8 +80,6 @@ final class InfoCharacterDetailCell: UICollectionViewCell {
             valueLabel.heightAnchor.constraint(equalToConstant: 25)
         ])
     }
-    
-    
     
     override func prepareForReuse() {
         super.prepareForReuse()

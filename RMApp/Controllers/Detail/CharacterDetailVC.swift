@@ -69,8 +69,6 @@ extension CharacterDetailVC: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        
         let sectionType = viewModel.sections[indexPath.section]
         switch sectionType {
         case .photo(let viewModel):
@@ -84,8 +82,20 @@ extension CharacterDetailVC: UICollectionViewDelegate, UICollectionViewDataSourc
         case .episodes(viewModels: let viewModels):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EpisodeCharacterDetailCell.cellIdentifier, for: indexPath) as? EpisodeCharacterDetailCell else { fatalError() }
             cell.configure(with: viewModels[indexPath.row])
-            cell.backgroundColor = .systemGreen
             return cell
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let sectionType = viewModel.sections[indexPath.section]
+        switch sectionType {
+        case .photo, .info:
+            break
+        case .episodes:
+            let episodes = viewModel.episodes
+            let selection = episodes[indexPath.row]
+            let vc = EpisodeDetailVC(url: URL(string: selection))
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
 }
