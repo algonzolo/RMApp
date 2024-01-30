@@ -13,21 +13,22 @@ final class EpisodeCharacterDetailCell: UICollectionViewCell {
     
     private let seasonLabel: UILabel = {
        let label = UILabel()
-        label.font = .systemFont(ofSize: 18, weight: .semibold)
+        label.font = .systemFont(ofSize: 16, weight: .semibold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let nameLabel: UILabel = {
        let label = UILabel()
-        label.font = .systemFont(ofSize: 20, weight: .regular)
+        label.numberOfLines = 0
+        label.font = .systemFont(ofSize: 18, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let airDateLabel: UILabel = {
        let label = UILabel()
-        label.font = .systemFont(ofSize: 16, weight: .light)
+        label.font = .systemFont(ofSize: 14, weight: .light)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -57,11 +58,13 @@ final class EpisodeCharacterDetailCell: UICollectionViewCell {
             nameLabel.topAnchor.constraint(equalTo: seasonLabel.bottomAnchor, constant: 8),
             nameLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 8),
             nameLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor),
-            nameLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.2),
+            nameLabel.bottomAnchor.constraint(equalTo: airDateLabel.topAnchor, constant: 8),
+            //nameLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.2),
             
-            airDateLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
+            //airDateLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
             airDateLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 8),
             airDateLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor),
+            airDateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
             airDateLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.2),
         ])
     }
