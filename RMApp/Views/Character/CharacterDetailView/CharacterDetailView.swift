@@ -13,13 +13,6 @@ final class CharacterDetailView: UIView {
     public var collectionView: UICollectionView?
     private let viewModel: CharacterDetailViewModel
     
-    private let spinner: UIActivityIndicatorView = {
-        let spinner = UIActivityIndicatorView(style: .large)
-        spinner.hidesWhenStopped = true
-        spinner.translatesAutoresizingMaskIntoConstraints = false
-        return spinner
-    }()
-    
     //MARK: - Init
     init(frame: CGRect, viewModel: CharacterDetailViewModel) {
         self.viewModel = viewModel
@@ -28,7 +21,7 @@ final class CharacterDetailView: UIView {
         backgroundColor = .systemBackground
         let collectionView = createCollectionView()
         self.collectionView = collectionView
-        addSubviews(collectionView, spinner)
+        addSubviews(collectionView)
         addConstraints()
     }
     
@@ -39,11 +32,6 @@ final class CharacterDetailView: UIView {
     private func addConstraints() {
         guard let collectionView = collectionView else { return }
         NSLayoutConstraint.activate([
-            spinner.widthAnchor.constraint(equalToConstant: 100),
-            spinner.heightAnchor.constraint(equalToConstant: 100),
-            spinner.centerYAnchor.constraint(equalTo: centerYAnchor),
-            spinner.centerXAnchor.constraint(equalTo:centerXAnchor),
-            
             collectionView.topAnchor.constraint(equalTo: topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
             collectionView.leftAnchor.constraint(equalTo: leftAnchor),
@@ -67,7 +55,6 @@ final class CharacterDetailView: UIView {
         let sectionTypes = viewModel.sections
         
         switch sectionTypes[sectionIndex] {
-            
         case .photo:
             return viewModel.createPhotoSectionLayout()
         case .info:

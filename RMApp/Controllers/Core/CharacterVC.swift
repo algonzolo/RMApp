@@ -17,6 +17,17 @@ final class CharacterVC: UIViewController {
         title = "Characters"
         view.addSubview(characterListView)
         setupView()
+        addSearchButton()
+    }
+    
+    private func addSearchButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(didTapSearch))
+    }
+    
+    @objc private func didTapSearch() {
+        let vc = SearchVC(config: SearchVC.Config(type: .character))
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func setupView() {
