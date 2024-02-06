@@ -23,6 +23,10 @@ final class PhotoCharacterDetailCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(imageView)
+        contentView.layer.cornerRadius = 8
+        contentView.layer.borderWidth = 0.5
+        contentView.layer.borderColor = UIColor.systemGray.cgColor
+        contentView.layer.masksToBounds = true
         setupConstarints()
     }
     

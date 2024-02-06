@@ -14,8 +14,10 @@ final class EpisodeDetailViewCell: UICollectionViewCell {
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .systemRed
+        contentView.backgroundColor = .tertiarySystemBackground
         contentView.layer.cornerRadius = 8
+        contentView.layer.borderWidth = 0.5
+        contentView.layer.borderColor = UIColor.systemGray.cgColor
         contentView.layer.masksToBounds = true
         addConstraints()
     }

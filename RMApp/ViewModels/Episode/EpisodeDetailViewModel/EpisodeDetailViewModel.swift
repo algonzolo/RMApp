@@ -99,7 +99,6 @@ final class EpisodeDetailViewModel {
     }
     
     // MARK: - Layouts
-    
     public func createInfoSectionLayout() -> NSCollectionLayoutSection? {
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
@@ -116,19 +115,17 @@ final class EpisodeDetailViewModel {
     }
     
     public func createCharacterSectionLayout() -> NSCollectionLayoutSection? {
-    
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
+            widthDimension: .fractionalWidth(0.5),
             heightDimension: .fractionalHeight(1.0)))
         item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 2, bottom: 4, trailing: 2)
         
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(0.4),
-            heightDimension: .fractionalHeight(0.25)),
-            subitems: [item])
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(0.4)),
+                                                       subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .groupPaging
         return section
     }
 }

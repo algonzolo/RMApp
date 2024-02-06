@@ -75,7 +75,6 @@ extension EpisodeDetailVC: UICollectionViewDelegate, UICollectionViewDataSource 
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let sections = viewModel.cellViewModels
         let sectionType = sections[indexPath.section]
         switch sectionType {

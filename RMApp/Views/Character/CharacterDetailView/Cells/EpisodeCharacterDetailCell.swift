@@ -38,7 +38,7 @@ final class EpisodeCharacterDetailCell: UICollectionViewCell {
         super.init(frame: frame)
         contentView.backgroundColor = .tertiarySystemBackground
         contentView.layer.cornerRadius = 8
-        contentView.layer.borderWidth = 2
+        contentView.layer.borderWidth = 0.5
         contentView.layer.borderColor = UIColor.systemGray.cgColor
         contentView.addSubviews(seasonLabel, nameLabel, airDateLabel)
         setupConstarints()
@@ -59,9 +59,7 @@ final class EpisodeCharacterDetailCell: UICollectionViewCell {
             nameLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 8),
             nameLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor),
             nameLabel.bottomAnchor.constraint(equalTo: airDateLabel.topAnchor, constant: 8),
-            //nameLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.2),
             
-            //airDateLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
             airDateLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 8),
             airDateLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor),
             airDateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
