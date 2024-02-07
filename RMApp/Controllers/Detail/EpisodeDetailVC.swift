@@ -28,16 +28,11 @@ final class EpisodeDetailVC: UIViewController {
         view.backgroundColor = .systemBackground
         title = "Episode"
         view.addSubview(detailView)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(didTapShare))
         addConstraint()
         viewModel.delegate = self
         viewModel.fetchEpisodeData()
         detailView.collectionView?.delegate = self
         detailView.collectionView?.dataSource = self
-    }
-    
-    @objc private func didTapShare() {
-        
     }
     
     private func addConstraint() {
@@ -92,6 +87,18 @@ extension EpisodeDetailVC: UICollectionViewDelegate, UICollectionViewDataSource 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        let sections = viewModel.cellViewModels
+        let sectionType = sections[indexPath.section]
+        switch sectionType {
+        case .characters:
+            guard let character = viewModel.character(at: indexPath.row) else { return }
+            let viewModel = CharacterDetailViewModel(character: character)
+            let detailVC = CharacterDetailVC(viewModel: viewModel)
+            detailVC.navigationItem.largeTitleDisplayMode = .never
+            navigationController?.pushViewController(detailVC, animated: true)
+        case .info:
+            break
+        }
     }
 }
+

@@ -12,30 +12,15 @@ final class InfoCharacterDetailCellViewModel {
     private let type: `Type`
     private let value: String
     
-    static let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSZ"
-        formatter.timeZone = .current
-        return formatter
-    }()
-    
-    static let shortDateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .short
-        formatter.timeZone = .current
-        return formatter
-    }()
-    
     public var title: String {
         self.type.displayTitle
     }
     
     public var displayValue: String {
         if value.isEmpty { return "None"}
-        if let date = Self.dateFormatter.date(from: value),
+        if let date = DateFormatter.dateFormatter.date(from: value),
            type == .created {
-            return Self.shortDateFormatter.string(from: date)
+            return DateFormatter.shortDateFormatter.string(from: date)
         }
         return value
     }

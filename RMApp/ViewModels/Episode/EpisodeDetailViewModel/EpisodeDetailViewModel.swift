@@ -34,16 +34,24 @@ final class EpisodeDetailViewModel {
         fetchEpisodeData()
     }
     
+    public func character(at index: Int) -> RMCharacter? {
+        guard let dataTuple = dataTuple else { return nil }
+        return dataTuple.characters[index]
+    }
+    
     //MARK: - Private
     private func createCellViewModels() {
         guard let dataTuple = dataTuple else {return}
         let characters = dataTuple.characters
         let episode = dataTuple.episode
+        let date = DateFormatter.dateFormatter.date(from: episode.created)!
+        let shortDate = DateFormatter.shortDateFormatter.string(from: date)
+        
         cellViewModels = [
             .info(viewModel: [.init(title: "Name", value: episode.name),
                               .init(title: "Air date", value: episode.air_date),
                               .init(title: "Episode", value: episode.episode),
-                              .init(title: "Created", value: episode.created)
+                              .init(title: "Created", value: shortDate)
             ]),
             .characters(viewModel: characters.compactMap({
                 return CharacterCellViewModel(characterName: $0.name,
@@ -107,7 +115,7 @@ final class EpisodeDetailViewModel {
         
         let group = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(80)),
+            heightDimension: .absolute(60)),
             subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)

@@ -29,14 +29,9 @@ final class CharacterDetailVC: UIViewController {
         view.backgroundColor = .systemBackground
         title = viewModel.title
         view.addSubview(detailView)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(didTapShare))
         addConstraint()
         detailView.collectionView?.delegate = self
         detailView.collectionView?.dataSource = self
-    }
-    
-    @objc private func didTapShare() {
-        
     }
     
     private func addConstraint() {
