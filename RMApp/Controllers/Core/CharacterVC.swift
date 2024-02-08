@@ -11,6 +11,7 @@ final class CharacterVC: UIViewController {
 
     private let characterListView = CharacterListView()
     
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground

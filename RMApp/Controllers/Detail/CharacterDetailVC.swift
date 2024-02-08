@@ -82,6 +82,7 @@ extension CharacterDetailVC: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
         let sectionType = viewModel.sections[indexPath.section]
         switch sectionType {
         case .photo, .info:

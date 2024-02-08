@@ -87,13 +87,14 @@ extension EpisodeDetailVC: UICollectionViewDelegate, UICollectionViewDataSource 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
         let sections = viewModel.cellViewModels
         let sectionType = sections[indexPath.section]
         switch sectionType {
         case .characters:
             guard let character = viewModel.character(at: indexPath.row) else { return }
-            let viewModel = CharacterDetailViewModel(character: character)
-            let detailVC = CharacterDetailVC(viewModel: viewModel)
+//            let viewModel = CharacterDetailViewModel(character: character)
+            let detailVC = CharacterDetailVC(viewModel: .init(character: character))
             detailVC.navigationItem.largeTitleDisplayMode = .never
             navigationController?.pushViewController(detailVC, animated: true)
         case .info:

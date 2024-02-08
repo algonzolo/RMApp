@@ -11,6 +11,7 @@ final class EpisodeVC: UIViewController {
     
     private let episodeListView = EpisodeListView()
     
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
