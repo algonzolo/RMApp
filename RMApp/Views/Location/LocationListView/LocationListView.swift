@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol LocationListViewDelegate: AnyObject {
+    func locationView(_locationView: LocationListView, didSelect location: RMLocation)
+}
+
 final class LocationListView: UIView {
+    
+    public weak var delegate: LocationListViewDelegate?
     
     private var viewModel: LocationListViewModel? {
         didSet {
@@ -68,6 +74,7 @@ final class LocationListView: UIView {
     
     public func configure(with viewModel: LocationListViewModel) {
         self.viewModel = viewModel
+        
     }
 }
 
@@ -79,14 +86,16 @@ extension LocationListView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cellViewModels = viewModel?.cellViewModels else { fatalError() }
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: LocationTableViewCell.cellIdentifier, for: indexPath) as? LocationTableViewCell else { fatalError()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: LocationTableViewCell.cellIdentifier, for: indexPath) as? LocationTableViewCell else { fatalError() }
         
         let cellViewModel = cellViewModels[indexPath.row]
-        cell.textLabel?.text = cellViewModel.name
-         return cell
+        cell.configure(with: cellViewModel)
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        guard let locationModel = viewModel?.location(at: indexPath.row) else { return }
+        delegate?.locationView(_locationView: self, didSelect: locationModel)
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol CharacterListViewDelegate: AnyObject {
-    func characterListView( _characterListView: CharacterListView, didSelectCharacter character: RMCharacter)
+    func characterListView( _characterListView: CharacterListView, didSelect character: RMCharacter)
 }
 
 /// View that handles showing list of characters and etc.
@@ -96,6 +96,6 @@ extension CharacterListView: CharacterListViewModelDelegate {
     
     
     func didSelectCharacter(_ character: RMCharacter) {
-        delegate?.characterListView(_characterListView: self, didSelectCharacter: character)
+        delegate?.characterListView(_characterListView: self, didSelect: character)
     }
 }

@@ -43,7 +43,7 @@ final class CharacterVC: UIViewController {
 }
 
 extension CharacterVC: CharacterListViewDelegate {
-    func characterListView(_characterListView: CharacterListView, didSelectCharacter character: RMCharacter) {
+    func characterListView(_characterListView: CharacterListView, didSelect character: RMCharacter) {
         let viewModel = CharacterDetailViewModel(character: character)
         let detailVC = CharacterDetailVC(viewModel: viewModel)
         detailVC.navigationItem.largeTitleDisplayMode = .never

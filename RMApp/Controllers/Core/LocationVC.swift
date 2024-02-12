@@ -18,6 +18,7 @@ final class LocationVC: UIViewController {
         view.addSubview(locationView)
         view.backgroundColor = .systemBackground
         title = "Locations"
+        locationView.delegate = self
         addSearchButton()
         setupConstraints()
         viewModel.delegate = self
@@ -50,3 +51,10 @@ extension LocationVC: LocationListViewModelDelegate {
     }
 }
 
+extension LocationVC: LocationListViewDelegate {
+    func locationView(_locationView: LocationListView, didSelect location: RMLocation) {
+        let vc = LocationDetailVC(location: location)
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}

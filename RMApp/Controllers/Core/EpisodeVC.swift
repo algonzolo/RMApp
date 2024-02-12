@@ -43,7 +43,7 @@ final class EpisodeVC: UIViewController {
 }
 
 extension EpisodeVC: EpisodeListViewDelegate {
-    func episodeListView(_episodeListView: EpisodeListView, didSelectEpisode episode: RMEpisode) {
+    func episodeListView(_episodeListView: EpisodeListView, didSelect episode: RMEpisode) {
         let detailVC = EpisodeDetailVC(url: URL(string: episode.url))
         detailVC.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(detailVC, animated: true)

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol EpisodeListViewDelegate: AnyObject {
-    func episodeListView( _episodeListView: EpisodeListView, didSelectEpisode episode: RMEpisode)
+    func episodeListView( _episodeListView: EpisodeListView, didSelect episode: RMEpisode)
 }
 
 /// View that handles showing list of episodes and etc.
@@ -96,6 +96,6 @@ extension EpisodeListView: EpisodeListViewModelDelegate {
     
     
     func didSelectEpisode(_ episode: RMEpisode) {
-        delegate?.episodeListView(_episodeListView: self, didSelectEpisode: episode)
+        delegate?.episodeListView(_episodeListView: self, didSelect: episode)
     }
 }

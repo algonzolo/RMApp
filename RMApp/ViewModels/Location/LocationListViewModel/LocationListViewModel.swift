@@ -25,7 +25,11 @@ final class LocationListViewModel {
     private var apiInfo: RMGetAllLocationsResponse.Info?
     public private(set) var cellViewModels: [LocationTableViewCellViewModel] = []
     
-    init() {
+    init() {}
+    
+    public func location(at index: Int) -> RMLocation? {
+        guard index < locations.count, index >= 0 else { return nil }
+        return self.locations[index]
     }
     
     public func fetchLocation() {
@@ -37,7 +41,7 @@ final class LocationListViewModel {
                 DispatchQueue.main.async {
                     self?.delegate?.didFetchInitialLoactions()
                 }
-            case .failure(let error):
+            case .failure:
                 break
             }
         }
