@@ -39,6 +39,10 @@ final class EpisodeDetailViewModel {
         return dataTuple.characters[index]
     }
     
+    public var title: String {
+        dataTuple?.episode.episode ?? ""
+    }
+    
     //MARK: - Private
     private func createCellViewModels() {
         guard let dataTuple = dataTuple else {return}
@@ -94,17 +98,32 @@ final class EpisodeDetailViewModel {
     }
     
     //MARK: - Public
+//    public func fetchEpisodeData() {
+//        guard let url = endpointURL, let request = RMRequest(url: url) else { return }
+//        RMService.shared.execute(request, expecting: RMEpisode.self) { [weak self] result in
+//            switch result {
+//            case .success(let model):
+//                self?.fetchRelatedCharacters(episode: model)
+//            case .failure:
+//                break
+//            }
+//        }
+//    }
+    
     public func fetchEpisodeData() {
         guard let url = endpointURL, let request = RMRequest(url: url) else { return }
         RMService.shared.execute(request, expecting: RMEpisode.self) { [weak self] result in
             switch result {
             case .success(let model):
+                self?.dataTuple = (episode: model, characters: [])
+                self?.delegate?.didFetchEpisodeDetails()
                 self?.fetchRelatedCharacters(episode: model)
             case .failure:
                 break
             }
         }
     }
+
     
     // MARK: - Layouts
     public func createInfoSectionLayout() -> NSCollectionLayoutSection? {

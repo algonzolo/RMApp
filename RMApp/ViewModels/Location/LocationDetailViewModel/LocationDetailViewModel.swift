@@ -30,7 +30,6 @@ final class LocationDetailViewModel {
     public private(set) var cellViewModels: [SectionType] = []
     
     //MARK: - Init
-    
     init(endpointURL: URL?) {
         self.endpointURL = endpointURL
         fetchLocationData()

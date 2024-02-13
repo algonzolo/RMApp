@@ -15,8 +15,7 @@ final class LocationDetailVC: UIViewController {
     
     // MARK: - Init
     init(location: RMLocation) {
-        let url = URL(string: location.url)
-        self.viewModel = LocationDetailViewModel(endpointURL: url)
+        self.viewModel = LocationDetailViewModel(endpointURL: URL(string: location.url))
         self.location = location
         super.init(nibName: nil, bundle: nil)
     }

@@ -13,7 +13,6 @@ final class EpisodeDetailVC: UIViewController {
     
     // MARK: - Init
     init(url: URL?) {
-        //self.viewModel = .init(endpointURL: url)
         self.viewModel = EpisodeDetailViewModel(endpointURL: url)
         super.init(nibName: nil, bundle: nil)
     }
@@ -26,7 +25,7 @@ final class EpisodeDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        title = "Episode"
+        title = viewModel.title
         view.addSubview(detailView)
         addConstraint()
         viewModel.delegate = self
@@ -93,7 +92,6 @@ extension EpisodeDetailVC: UICollectionViewDelegate, UICollectionViewDataSource 
         switch sectionType {
         case .characters:
             guard let character = viewModel.character(at: indexPath.row) else { return }
-//            let viewModel = CharacterDetailViewModel(character: character)
             let detailVC = CharacterDetailVC(viewModel: .init(character: character))
             detailVC.navigationItem.largeTitleDisplayMode = .never
             navigationController?.pushViewController(detailVC, animated: true)

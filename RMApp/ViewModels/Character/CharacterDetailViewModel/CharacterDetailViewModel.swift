@@ -50,7 +50,7 @@ final class CharacterDetailViewModel {
     }
     
     public var title: String {
-        character.name.uppercased()
+        character.name.capitalized
     }
     
     // MARK: - Layouts
