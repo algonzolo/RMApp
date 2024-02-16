@@ -39,7 +39,7 @@ final class LocationVC: UIViewController {
     }
     
     @objc private func didTapSearch() {
-        let vc = SearchVC(config: SearchVC.Config(type: .character))
+        let vc = SearchVC(config: SearchVC.Config(type: .location))
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
     }
