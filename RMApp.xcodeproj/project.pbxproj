@@ -56,6 +56,7 @@
 		AB2CD3752B73D5A300EB6AFF /* SettingsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2CD3742B73D5A300EB6AFF /* SettingsCellViewModel.swift */; };
 		AB2CD3772B73D65800EB6AFF /* SettingsOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2CD3762B73D65800EB6AFF /* SettingsOption.swift */; };
 		AB2CD37A2B73DDBE00EB6AFF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2CD3792B73DDBE00EB6AFF /* SettingsView.swift */; };
+		AB3392932B7F4665004900D0 /* SearchOptionPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3392922B7F4665004900D0 /* SearchOptionPickerVC.swift */; };
 		AB4210B32B75068800A554F7 /* LocationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4210B22B75068800A554F7 /* LocationListView.swift */; };
 		AB4210B62B750E1D00A554F7 /* LocationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4210B52B750E1D00A554F7 /* LocationListViewModel.swift */; };
 		AB4210B82B75161600A554F7 /* RMGetAllLocationsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4210B72B75161600A554F7 /* RMGetAllLocationsResponse.swift */; };
@@ -148,6 +149,7 @@
 		AB2CD3742B73D5A300EB6AFF /* SettingsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellViewModel.swift; sourceTree = "<group>"; };
 		AB2CD3762B73D65800EB6AFF /* SettingsOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOption.swift; sourceTree = "<group>"; };
 		AB2CD3792B73DDBE00EB6AFF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AB3392922B7F4665004900D0 /* SearchOptionPickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchOptionPickerVC.swift; sourceTree = "<group>"; };
 		AB4210B22B75068800A554F7 /* LocationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListView.swift; sourceTree = "<group>"; };
 		AB4210B52B750E1D00A554F7 /* LocationListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListViewModel.swift; sourceTree = "<group>"; };
 		AB4210B72B75161600A554F7 /* RMGetAllLocationsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMGetAllLocationsResponse.swift; sourceTree = "<group>"; };
@@ -506,6 +508,7 @@
 			isa = PBXGroup;
 			children = (
 				AB2CD3652B69243900EB6AFF /* SearchVC.swift */,
+				AB3392922B7F4665004900D0 /* SearchOptionPickerVC.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -861,6 +864,7 @@
 				AB2CD3632B690E5600EB6AFF /* RMGetAllEpisodesResponse.swift in Sources */,
 				AB4210BE2B75238E00A554F7 /* LocationTableViewCellViewModel.swift in Sources */,
 				AB4210B32B75068800A554F7 /* LocationListView.swift in Sources */,
+				AB3392932B7F4665004900D0 /* SearchOptionPickerVC.swift in Sources */,
 				AB4210B82B75161600A554F7 /* RMGetAllLocationsResponse.swift in Sources */,
 				AB2C1BB62B5A8E6100722CB6 /* CharacterListViewModel.swift in Sources */,
 				AB2CD3432B62C10900EB6AFF /* EpisodeCharacterDetailCell.swift in Sources */,

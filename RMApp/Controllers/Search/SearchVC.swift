@@ -62,7 +62,7 @@ final class SearchVC: UIViewController {
     }
     
     @objc private func didTapExecuteSearch() {
-//        viewModel.executeSearch
+        viewModel.executeSearch
     }
 
     private func addConstraints() {
@@ -78,6 +78,19 @@ final class SearchVC: UIViewController {
 //MARK: - SearchViewDelegate
 extension SearchVC: SearchViewDelegate {
     func searchView(_ searchView: SearchView, didSelect option: SearchInputViewModel.DynamicOption) {
-        print("show \(option.rawValue)")
+        let vc = SearchOptionPickerVC(option: option) { [weak self] selection in
+            DispatchQueue.main.async {
+                self?.viewModel.set(value: selection, for: option)
+            }
+        }
+        
+        vc.modalPresentationStyle = .formSheet
+        let sheet = vc.sheetPresentationController
+        let fraction = UISheetPresentationController.Detent.custom { context in
+            CGFloat(option.choices.count) * 40
+        }
+        sheet?.detents = [fraction]
+        vc.sheetPresentationController?.prefersGrabberVisible = true
+        present(vc, animated: true)
     }
 }

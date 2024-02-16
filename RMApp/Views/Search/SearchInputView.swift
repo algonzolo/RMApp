@@ -23,6 +23,8 @@ final class SearchInputView: UIView {
         }
     }
     
+    private var stackView: UIStackView?
+    
     private let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.placeholder = "Search"
@@ -74,7 +76,7 @@ final class SearchInputView: UIView {
     
     private func createButton(with option:SearchInputViewModel.DynamicOption, tag: Int) -> UIButton {
         let button = UIButton()
-        button.setAttributedTitle(NSAttributedString(string: option.rawValue, attributes: [.font: UIFont.systemFont(ofSize: 18, weight: .medium), .foregroundColor: UIColor.label]), for: .normal)
+        button.setAttributedTitle(NSAttributedString(string: option.rawValue, attributes: [.font: UIFont.systemFont(ofSize: 18, weight: .medium), .foregroundColor: UIColor.link]), for: .normal)
         button.backgroundColor = .secondarySystemBackground
         button.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
         button.tag = tag
@@ -84,6 +86,7 @@ final class SearchInputView: UIView {
     
     private func createOptionSelectionView(options: [SearchInputViewModel.DynamicOption] ) {
         let stackView = createOptionStackView()
+        self.stackView = stackView
         for x in 0..<options.count {
             let option = options[x]
             let button = createButton(with: option, tag: x)
@@ -105,5 +108,13 @@ final class SearchInputView: UIView {
     
     public func presentKeyboard() {
         searchBar.becomeFirstResponder()
+    }
+    
+    public func update(option: SearchInputViewModel.DynamicOption, value: String) {
+        guard let buttons = stackView?.arrangedSubviews as? [UIButton], 
+              let options = viewModel?.options,
+              let index = options.firstIndex(of: option) else { return }
+        
+        buttons[index].setAttributedTitle(NSAttributedString(string: value.capitalized, attributes: [.font: UIFont.systemFont(ofSize: 18, weight: .medium), .foregroundColor: UIColor.link]), for: .normal)
     }
 }
