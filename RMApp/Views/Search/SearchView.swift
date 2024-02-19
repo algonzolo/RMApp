@@ -59,7 +59,6 @@ final class SearchView: UIView {
 }
 
 //MARK: - CollectionView
-
 extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 0
@@ -67,6 +66,7 @@ extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        cell.backgroundColor = .brown
         return cell
     }
     
@@ -79,5 +79,13 @@ extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource {
 extension SearchView: SearchInputViewDelegate {
     func searchInputView(_ inputView: SearchInputView, didSelect option: SearchInputViewModel.DynamicOption) {
         delegate?.searchView(self, didSelect: option)
+    }
+    
+    func searchInputView(_ inputView: SearchInputView, didchangeSearchText text: String) {
+        viewModel.updateText(text: text)
+    }
+    
+    func searchInputViewDidTapSearch(_ inputView: SearchInputView) {
+        viewModel.executeSearch()
     }
 }

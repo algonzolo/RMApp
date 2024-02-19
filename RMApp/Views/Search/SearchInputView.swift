@@ -9,6 +9,8 @@ import UIKit
 
 protocol SearchInputViewDelegate: AnyObject {
     func searchInputView(_ inputView: SearchInputView, didSelect option: SearchInputViewModel.DynamicOption)
+    func searchInputView(_ inputView: SearchInputView, didchangeSearchText text: String)
+    func searchInputViewDidTapSearch(_ inputView: SearchInputView)
 }
 
 final class SearchInputView: UIView {
@@ -40,12 +42,14 @@ final class SearchInputView: UIView {
         backgroundColor = .systemBackground
         addSubviews(searchBar)
         addConstraints()
+        searchBar.delegate = self
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Private
     private func addConstraints() {
         NSLayoutConstraint.activate([
             searchBar.topAnchor.constraint(equalTo: topAnchor),
@@ -101,6 +105,7 @@ final class SearchInputView: UIView {
         delegate?.searchInputView(self, didSelect: selectedOption)
     }
     
+    //MARK: - Public
     public func configure(with viewModel: SearchInputViewModel) {
         searchBar.placeholder = viewModel.searchPlaceholderText
         self.viewModel = viewModel
@@ -116,5 +121,19 @@ final class SearchInputView: UIView {
               let index = options.firstIndex(of: option) else { return }
         
         buttons[index].setAttributedTitle(NSAttributedString(string: value.capitalized, attributes: [.font: UIFont.systemFont(ofSize: 18, weight: .medium), .foregroundColor: UIColor.link]), for: .normal)
+    }
+}
+
+//MARK: - UISearchBarDelegate
+extension SearchInputView: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // Notify delegate of change text
+        delegate?.searchInputView(self, didchangeSearchText: searchText)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        // Notify that search button was tapped
+        searchBar.resignFirstResponder()
+        delegate?.searchInputViewDidTapSearch(self)
     }
 }
