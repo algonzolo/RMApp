@@ -17,6 +17,7 @@ final class SearchView: UIView {
     
     private let searchInputView = SearchInputView()
     private let noResultView = NoSearchResultView()
+    private let resultView = SearchResultView()
     
     //MARK: - Init
     init(frame: CGRect, viewModel: SearchViewModel) {
@@ -24,26 +25,52 @@ final class SearchView: UIView {
         super.init(frame: frame)
         backgroundColor = .systemBackground
         translatesAutoresizingMaskIntoConstraints = false
-        addSubviews(noResultView, searchInputView)
+        addSubviews(resultView, noResultView, searchInputView)
         addConstraints()
         searchInputView.configure(with: .init(type: viewModel.config.type))
         searchInputView.delegate = self
-        
-        viewModel.registerOptionChangeBlock { tuple in
-            self.searchInputView.update(option: tuple.0, value: tuple.1)
-        }
+        setupHandlers(viewModel: viewModel)
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     //MARK: - Private
+    
+    private func setupHandlers(viewModel: SearchViewModel) {
+        
+        viewModel.registerOptionChangeBlock { tuple in
+            self.searchInputView.update(option: tuple.0, value: tuple.1)
+            }
+        
+        viewModel.registerSearchResultHandler { [weak self] results in
+            DispatchQueue.main.async {
+                self?.resultView.configure(with: results)
+                self?.noResultView.isHidden = true
+                self?.resultView.isHidden = false
+            }
+        }
+        
+        viewModel.registerNoResultsHandler { [weak self] in
+            DispatchQueue.main.async {
+                self?.noResultView.isHidden = false
+                self?.resultView.isHidden = true
+            }
+        }
+    }
+    
     private func addConstraints() {
         NSLayoutConstraint.activate([
             searchInputView.topAnchor.constraint(equalTo: topAnchor),
             searchInputView.heightAnchor.constraint(equalToConstant: viewModel.config.type == .episode ? 60 : 120),
             searchInputView.leftAnchor.constraint(equalTo: leftAnchor),
             searchInputView.rightAnchor.constraint(equalTo: rightAnchor),
+            
+            resultView.topAnchor.constraint(equalTo: searchInputView.bottomAnchor),
+            resultView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            resultView.leftAnchor.constraint(equalTo: leftAnchor),
+            resultView.rightAnchor.constraint(equalTo: rightAnchor),
             
             noResultView.widthAnchor.constraint(equalToConstant: 160),
             noResultView.heightAnchor.constraint(equalToConstant: 160),
@@ -82,7 +109,7 @@ extension SearchView: SearchInputViewDelegate {
     }
     
     func searchInputView(_ inputView: SearchInputView, didchangeSearchText text: String) {
-        viewModel.updateText(text: text)
+        viewModel.set(query: text)
     }
     
     func searchInputViewDidTapSearch(_ inputView: SearchInputView) {
