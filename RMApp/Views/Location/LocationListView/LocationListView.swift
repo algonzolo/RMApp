@@ -23,6 +23,15 @@ final class LocationListView: UIView {
             UIView.animate(withDuration: 0.3) {
                 self.tableView.alpha = 1
             }
+            
+            viewModel?.registerDidFinishPaginationBlock { [weak self] in
+                DispatchQueue.main.async {
+                    if !(self?.viewModel?.apiInfo?.next != nil) {
+                        self?.tableView.tableFooterView = nil
+                    }
+                    self?.tableView.reloadData()
+                }
+            }
         }
     }
     
@@ -97,5 +106,34 @@ extension LocationListView: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         guard let locationModel = viewModel?.location(at: indexPath.row) else { return }
         delegate?.locationView(_locationView: self, didSelect: locationModel)
+    }
+}
+
+extension LocationListView: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard let viewModel = viewModel,
+              !viewModel.cellViewModels.isEmpty,
+              viewModel.shouldShowLoadingIndicator,
+              !viewModel.isLoadingMoreLocations  else { return }
+
+        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { [weak self] timer in
+            let offset = scrollView.contentOffset.y
+            let totalContentHeight = scrollView.contentSize.height
+            let totalScrollViewFixedHeight = scrollView.frame.size.height
+            
+            if offset >= (totalContentHeight - totalScrollViewFixedHeight - 120) {
+                self?.showLoadingIndicator()
+                
+                viewModel.fetchAdditionalLocations()
+            }
+            
+            timer.invalidate()
+        }
+    }
+    
+    private func showLoadingIndicator() {
+        let footerView = TableLoadingFooterView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: 100))
+        footerView.startAnimating()
+        tableView.tableFooterView = footerView
     }
 }

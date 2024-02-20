@@ -89,7 +89,6 @@ final class EpisodeListViewModel: NSObject {
     }
 }
  // MARK: - CollectionView
-
 extension EpisodeListViewModel: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return cellViewModels.count

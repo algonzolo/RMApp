@@ -78,7 +78,6 @@ final class EpisodeListView: UIView {
 }
 
 extension EpisodeListView: EpisodeListViewModelDelegate {
-    
     func didLoadInitialEpisodes() {
         spinner.stopAnimating()
         collectionView.isHidden = false
@@ -93,7 +92,6 @@ extension EpisodeListView: EpisodeListViewModelDelegate {
             collectionView.insertItems(at: newIndexPath)
         }
     }
-    
     
     func didSelectEpisode(_ episode: RMEpisode) {
         delegate?.episodeListView(_episodeListView: self, didSelect: episode)
