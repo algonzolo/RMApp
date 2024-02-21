@@ -55,6 +55,7 @@ final class CharacterListView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     // MARK: - Methods
     private func setupConstraints() {
         NSLayoutConstraint.activate([
@@ -73,12 +74,10 @@ final class CharacterListView: UIView {
     private func setupCollectionView() {
         collectionView.dataSource = viewModel
         collectionView.delegate = viewModel
-
     }
 }
 
 extension CharacterListView: CharacterListViewModelDelegate {
-    
     func didLoadInitialCharacters() {
         spinner.stopAnimating()
         collectionView.isHidden = false

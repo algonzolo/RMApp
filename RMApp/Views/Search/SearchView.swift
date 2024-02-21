@@ -10,6 +10,7 @@ import UIKit
 protocol SearchViewDelegate: AnyObject {
     func searchView(_ searchView: SearchView, didSelect option: SearchInputViewModel.DynamicOption)
     func searchView(_ searchView: SearchView, didSelect location: RMLocation)
+    func searchView(_ searchView: SearchView, isActive button: Bool)
 }
 
 final class SearchView: UIView {
@@ -41,14 +42,13 @@ final class SearchView: UIView {
     //MARK: - Private
     
     private func setupHandlers(viewModel: SearchViewModel) {
-        
         viewModel.registerOptionChangeBlock { tuple in
             self.searchInputView.update(option: tuple.0, value: tuple.1)
             }
         
-        viewModel.registerSearchResultHandler { [weak self] results in
+        viewModel.registerSearchResultHandler { [weak self] result in
             DispatchQueue.main.async {
-                self?.resultView.configure(with: results)
+                self?.resultView.configure(with: result)
                 self?.noResultView.isHidden = true
                 self?.resultView.isHidden = false
             }
@@ -106,6 +106,10 @@ extension SearchView: UICollectionViewDelegate, UICollectionViewDataSource {
 
 //MARK: - SearchInputViewDelegate
 extension SearchView: SearchInputViewDelegate {
+    func searchInputViewDidTapSearch(_ inputView: SearchInputView) {
+        viewModel.executeSearch()
+    }
+    
     func searchInputView(_ inputView: SearchInputView, didSelect option: SearchInputViewModel.DynamicOption) {
         delegate?.searchView(self, didSelect: option)
     }
@@ -114,8 +118,8 @@ extension SearchView: SearchInputViewDelegate {
         viewModel.set(query: text)
     }
     
-    func searchInputViewDidTapSearch(_ inputView: SearchInputView) {
-        viewModel.executeSearch()
+    func searchInputViewDidTapSearch(_ inputView: SearchInputView, didChangeButtonState isEnabled: Bool) {
+        delegate?.searchView(self, isActive: isEnabled)
     }
 }
 

@@ -91,6 +91,7 @@ final class CharacterListViewModel: NSObject {
         return apiInfo?.next != nil
     }
 }
+
  // MARK: - CollectionView
 
 extension CharacterListViewModel: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -119,6 +120,7 @@ extension CharacterListViewModel: UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        // TODO: Edit on another screen
         guard shouldShowLoadingIndicator else { return .zero }
         return CGSize(width: collectionView.frame.width, height: 100)
     }

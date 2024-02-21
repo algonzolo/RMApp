@@ -64,6 +64,7 @@ final class SearchVC: UIViewController {
         view.addSubview(searchView)
         addConstraints()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Search", style: .done, target: self, action: #selector(didTapExecuteSearch))
+        navigationItem.rightBarButtonItem?.isEnabled = false
         searchView.delegate = self
     }
     
@@ -88,6 +89,10 @@ final class SearchVC: UIViewController {
 
 //MARK: - SearchViewDelegate
 extension SearchVC: SearchViewDelegate {
+    func searchView(_ searchView: SearchView, isActive button: Bool) {
+        button ? (navigationItem.rightBarButtonItem?.isEnabled = true) : (navigationItem.rightBarButtonItem?.isEnabled = false)
+    }
+        
     func searchView(_ searchView: SearchView, didSelect option: SearchInputViewModel.DynamicOption) {
         let vc = SearchOptionPickerVC(option: option) { [weak self] selection in
             DispatchQueue.main.async {

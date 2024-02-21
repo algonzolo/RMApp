@@ -479,8 +479,8 @@
 		AB2CD35A2B69040000EB6AFF /* Episode */ = {
 			isa = PBXGroup;
 			children = (
-				AB2CD3552B68EF3200EB6AFF /* EpisodeDetailView */,
 				AB2CD3582B6903D400EB6AFF /* EpisodeListView */,
+				AB2CD3552B68EF3200EB6AFF /* EpisodeDetailView */,
 			);
 			path = Episode;
 			sourceTree = "<group>";
@@ -565,8 +565,8 @@
 		AB4210B12B75066800A554F7 /* Location */ = {
 			isa = PBXGroup;
 			children = (
-				AB4F310A2B7A1B8D00938BBA /* LocationDetailView */,
 				AB4F31092B7A1B8200938BBA /* LocationListView */,
+				AB4F310A2B7A1B8D00938BBA /* LocationDetailView */,
 			);
 			path = Location;
 			sourceTree = "<group>";

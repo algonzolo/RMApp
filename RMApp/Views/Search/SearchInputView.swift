@@ -11,6 +11,7 @@ protocol SearchInputViewDelegate: AnyObject {
     func searchInputView(_ inputView: SearchInputView, didSelect option: SearchInputViewModel.DynamicOption)
     func searchInputView(_ inputView: SearchInputView, didchangeSearchText text: String)
     func searchInputViewDidTapSearch(_ inputView: SearchInputView)
+    func searchInputViewDidTapSearch(_ inputView: SearchInputView, didChangeButtonState isEnabled: Bool)
 }
 
 final class SearchInputView: UIView {
@@ -129,6 +130,14 @@ extension SearchInputView: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         // Notify delegate of change text
         delegate?.searchInputView(self, didchangeSearchText: searchText)
+        
+        if let text = searchBar.text, !text.isEmpty {
+            // Если не пустой, активируем кнопку и уведомляем делегата
+            delegate?.searchInputViewDidTapSearch(self, didChangeButtonState: true)
+        } else {
+            // Если пустой, деактивируем кнопку и уведомляем делегата
+            delegate?.searchInputViewDidTapSearch(self, didChangeButtonState: false)
+        }
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
