@@ -140,17 +140,9 @@ extension EpisodeListViewModel: UIScrollViewDelegate {
               !isLoadingEpisodes,
               !cellViewModels.isEmpty,
               let nextPageURL = apiInfo?.next,
-              let url = URL(string: nextPageURL) else { return }
-        // TODO: Learning how it works
-        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { [weak self] timer in
-            let offset = scrollView.contentOffset.y
-            let totalContentHeight = scrollView.contentSize.height
-            let totalScrollViewFixedHeight = scrollView.frame.size.height
-            
-            if offset >= (totalContentHeight - totalScrollViewFixedHeight - 120) {
-                self?.fetchAdditionalEpisodes(url: url)
-            }
-            timer.invalidate()
-        }
+              let url = URL(string: nextPageURL),
+              scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.frame.size.height - 120) else { return }
+        
+        fetchAdditionalEpisodes(url: url)
     }
 }

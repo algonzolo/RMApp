@@ -15,6 +15,7 @@ protocol CharacterListViewModelDelegate: AnyObject {
 final class CharacterListViewModel: NSObject {
     public weak var delegate: CharacterListViewModelDelegate?
     private var isLoadingCharacters = false
+    private var loadMoreCharactersWorkItem: DispatchWorkItem?
     private var characters: [RMCharacter] = [] {
         didSet {
             for character in characters {
@@ -147,8 +148,10 @@ extension CharacterListViewModel: UIScrollViewDelegate {
               !cellViewModels.isEmpty,
               let nextPageURL = apiInfo?.next,
               let url = URL(string: nextPageURL) else { return }
-        // TODO: Learning how it works
-        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { [weak self] timer in
+
+        loadMoreCharactersWorkItem?.cancel()
+        
+        let workItem = DispatchWorkItem { [weak self] in
             let offset = scrollView.contentOffset.y
             let totalContentHeight = scrollView.contentSize.height
             let totalScrollViewFixedHeight = scrollView.frame.size.height
@@ -156,7 +159,9 @@ extension CharacterListViewModel: UIScrollViewDelegate {
             if offset >= (totalContentHeight - totalScrollViewFixedHeight - 120) {
                 self?.fetchAdditionalCharacters(url: url)
             }
-            timer.invalidate()
         }
+        
+        loadMoreCharactersWorkItem = workItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: workItem)
     }
 }

@@ -89,6 +89,18 @@ final class SearchVC: UIViewController {
 
 //MARK: - SearchViewDelegate
 extension SearchVC: SearchViewDelegate {
+    func searchView(_ searchView: SearchView, didSelectCharacter character: RMCharacter) {
+        let vc = CharacterDetailVC(viewModel: .init(character: character))
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func searchView(_ searchView: SearchView, didSelectEpisode episode: RMEpisode) {
+        let vc = EpisodeDetailVC(url: URL(string: episode.url))
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func searchView(_ searchView: SearchView, isActive button: Bool) {
         button ? (navigationItem.rightBarButtonItem?.isEnabled = true) : (navigationItem.rightBarButtonItem?.isEnabled = false)
     }
@@ -110,7 +122,7 @@ extension SearchVC: SearchViewDelegate {
         present(vc, animated: true)
     }
     
-    func searchView(_ searchView: SearchView, didSelect location: RMLocation) {
+    func searchView(_ searchView: SearchView, didSelectLocation location: RMLocation) {
         let vc = LocationDetailVC(location: location)
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)

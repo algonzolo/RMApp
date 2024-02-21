@@ -9,7 +9,9 @@ import UIKit
 
 protocol SearchViewDelegate: AnyObject {
     func searchView(_ searchView: SearchView, didSelect option: SearchInputViewModel.DynamicOption)
-    func searchView(_ searchView: SearchView, didSelect location: RMLocation)
+    func searchView(_ searchView: SearchView, didSelectLocation location: RMLocation)
+    func searchView(_ searchView: SearchView, didSelectCharacter character: RMCharacter)
+    func searchView(_ searchView: SearchView, didSelectEpisode episode: RMEpisode)
     func searchView(_ searchView: SearchView, isActive button: Bool)
 }
 
@@ -124,8 +126,18 @@ extension SearchView: SearchInputViewDelegate {
 }
 
 extension SearchView: SearchResultViewDelegate {
+    func searchResultsView(_ resultsView: SearchResultView, didTapCharacterAt index: Int) {
+        guard let characterModel = viewModel.characterSearchResult(at: index) else { return }
+        delegate?.searchView(self, didSelectCharacter: characterModel)
+    }
+    
+    func searchResultsView(_ resultsView: SearchResultView, didTapEpisodeAt index: Int) {
+        guard let episodeModel = viewModel.episodeSearchResult(at: index) else { return }
+        delegate?.searchView(self, didSelectEpisode: episodeModel)
+    }
+    
     func searchResultView(_ resultsView: SearchResultView, didTapLocationAt index: Int) {
         guard let locationModel = viewModel.locationSearchResult(at: index) else { return }
-        delegate?.searchView(self, didSelect: locationModel)
+        delegate?.searchView(self, didSelectLocation: locationModel)
     }
 }

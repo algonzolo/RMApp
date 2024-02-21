@@ -9,6 +9,8 @@ import UIKit
 
 protocol SearchResultViewDelegate: AnyObject {
     func searchResultView(_ resultsView: SearchResultView, didTapLocationAt index: Int)
+    func searchResultsView(_ resultsView: SearchResultView, didTapCharacterAt index: Int)
+    func searchResultsView(_ resultsView: SearchResultView, didTapEpisodeAt index: Int)
 }
 
 final class SearchResultView: UIView {
@@ -156,6 +158,16 @@ extension SearchResultView: UICollectionViewDataSource, UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
+        
+        guard let viewModel = viewModel else { return }
+        switch viewModel.results {
+        case .characters:
+            delegate?.searchResultsView(self, didTapCharacterAt: indexPath.row)
+        case .episodes:
+            delegate?.searchResultsView(self, didTapEpisodeAt: indexPath.row)
+        case .locations:
+            break
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -165,8 +177,34 @@ extension SearchResultView: UICollectionViewDataSource, UICollectionViewDelegate
             let width = (bounds - 30) / 2
             return CGSize(width: width, height: width * 1.5)
         } else {
-            return CGSize(width: collectionView.frame.width, height: 100)
+            return CGSize(width: collectionView.frame.width - 20, height: 100)
+            
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard kind == UICollectionView.elementKindSectionFooter,
+              let footer = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: FooterLoadingCollectionReusableView.cellIdentifier,
+                for: indexPath
+              ) as? FooterLoadingCollectionReusableView else {
+            fatalError("Unsupported")
+        }
+        if let viewModel = viewModel, viewModel.shouldShowLoadMoreIndicator {
+            footer.startAnimating()
+        }
+        return footer
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        guard let viewModel = viewModel,
+              viewModel.shouldShowLoadMoreIndicator else {
+            return .zero
+        }
+
+        return CGSize(width: collectionView.frame.width,
+                      height: 100)
     }
 }
 
