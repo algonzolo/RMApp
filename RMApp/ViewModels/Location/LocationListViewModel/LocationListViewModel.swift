@@ -35,6 +35,9 @@ final class LocationListViewModel {
     }
     
     public func location(at index: Int) -> RMLocation? {
+        print("location index is \(index)")
+        print("location count is \(locations.count)")
+        
         guard index < locations.count, index >= 0 else { return nil }
         return self.locations[index]
     }
@@ -74,6 +77,7 @@ final class LocationListViewModel {
                 let nextResults = responseModel.results
                 let info = responseModel.info
                 strongSelf.apiInfo = info
+                strongSelf.locations.append(contentsOf: nextResults)
                 strongSelf.cellViewModels.append(contentsOf: nextResults.compactMap({
                     return LocationTableViewCellViewModel(location: $0)
                 }))
